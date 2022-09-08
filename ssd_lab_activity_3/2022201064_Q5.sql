@@ -1,0 +1,1 @@
+select Mgr_ssn,Dnumber,Number_of_Dependents from (select Mgr_ssn, Dnumber from DEPARTMENT where Dnumber IN (select Dnumber from (Select Dnumber, count(Dlocation) as Number_of_locations  From DEPT_LOCATIONS group by Dnumber having Number_of_locations>=2) as d)) as x ,(select Essn,count(Dependent_name) as Number_of_Dependents from DEPENDENT group by Essn) as y where Essn=Mgr_ssn;

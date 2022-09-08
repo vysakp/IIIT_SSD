@@ -1,0 +1,1 @@
+select Fullname, Ssn, Dname, Dnumber FROM DEPARTMENT, (select CONCAT(Fname,' ',Minit,' ',Lname) as Fullname, Ssn from EMPLOYEE WHERE Ssn IN (SELECT Super_ssn FROM EMPLOYEE, (SELECT Essn, SUM(Hours) FROM WORKS_ON  GROUP BY Essn HAVING SUM(Hours)<40) AS b WHERE Essn=Ssn)) AS mng WHERE Mgr_ssn=Ssn;
